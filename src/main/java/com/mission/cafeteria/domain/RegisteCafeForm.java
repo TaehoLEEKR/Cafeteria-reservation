@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 
 public class RegisteCafeForm {
     private String cname;
+    private String email;
+    private String description;
     private String address;
     private String phone;
     private String master;

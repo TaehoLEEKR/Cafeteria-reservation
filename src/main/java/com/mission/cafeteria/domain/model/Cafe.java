@@ -19,8 +19,9 @@ public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String cname;
+    private String email;
+    private String description;
     private String address;
     private String phone;
     private String master;
@@ -29,6 +30,8 @@ public class Cafe {
 
         return Cafe.builder()
                 .cname(form.getCname())
+                .email(form.getEmail())
+                .description(form.getDescription())
                 .address(form.getAddress())
                 .phone(form.getPhone())
                 .master(form.getMaster())
