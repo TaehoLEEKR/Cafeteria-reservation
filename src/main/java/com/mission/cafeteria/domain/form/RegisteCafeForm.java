@@ -1,4 +1,4 @@
-package com.mission.cafeteria.domain;
+package com.mission.cafeteria.domain.form;
 
 import lombok.*;
 
@@ -16,5 +16,5 @@ public class RegisteCafeForm {
     private String description;
     private String address;
     private String phone;
-    private String master;
+    private Long masterid;
 }

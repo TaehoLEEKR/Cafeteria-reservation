@@ -1,6 +1,6 @@
 package com.mission.cafeteria.domain.model;
 
-import com.mission.cafeteria.domain.RegisteCafeForm;
+import com.mission.cafeteria.domain.form.RegisteCafeForm;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -19,12 +19,12 @@ public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private Long masterid;
     private String cname;
     private String email;
     private String description;
     private String address;
     private String phone;
-    private String master;
 
     public static Cafe from(RegisteCafeForm form){
 
@@ -34,7 +34,7 @@ public class Cafe {
                 .description(form.getDescription())
                 .address(form.getAddress())
                 .phone(form.getPhone())
-                .master(form.getMaster())
+                .masterid(form.getMasterid())
                 .build();
     }
 }

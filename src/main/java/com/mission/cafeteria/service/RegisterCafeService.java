@@ -1,6 +1,6 @@
 package com.mission.cafeteria.service;
 
-import com.mission.cafeteria.domain.RegisteCafeForm;
+import com.mission.cafeteria.domain.form.RegisteCafeForm;
 import com.mission.cafeteria.domain.model.Cafe;
 import com.mission.cafeteria.domain.model.Partner;
 import com.mission.cafeteria.domain.repository.CafeRepository;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Locale;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

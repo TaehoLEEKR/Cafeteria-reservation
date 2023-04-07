@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface PartnerRepository extends JpaRepository<Partner,Long> {
     Optional<Partner> findByEmail(String email);
+    //Optional<Partner> findByEmailAndVerify(String email,boolean verify);
 
 }

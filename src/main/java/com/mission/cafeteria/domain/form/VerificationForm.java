@@ -1,4 +1,4 @@
-package com.mission.cafeteria.domain;
+package com.mission.cafeteria.domain.form;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

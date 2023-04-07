@@ -1,7 +1,7 @@
 package com.mission.cafeteria.domain.model;
 
 
-import com.mission.cafeteria.domain.VerificationForm;
+import com.mission.cafeteria.domain.form.VerificationForm;
 import lombok.*;
 
 import javax.persistence.*;
