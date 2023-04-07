@@ -4,6 +4,7 @@ import com.mission.cafeteria.client.MailgunClient;
 import com.mission.cafeteria.client.mailgun.SendMailForm;
 import com.mission.cafeteria.domain.form.SignUpForm;
 import com.mission.cafeteria.domain.form.VerificationForm;
+import com.mission.cafeteria.domain.model.Customer;
 import com.mission.cafeteria.domain.model.Partner;
 import com.mission.cafeteria.exception.ErrorCode;
 import com.mission.cafeteria.exception.PartnerException;
@@ -37,7 +38,7 @@ public class VerificationApplication {
                     .text(getVerificationEmailBody(form.getEmail(), form.getMaster(), "MASTER" ,code))
                     .build();
             mailgunClient.sendEmail(sendMailForm);
-            verificationPartnerService.ChangeCustomerValidateEmail(partner.getId(),code);
+            verificationPartnerService.ChangePartnerValidateEmail(partner.getId(),code);
 
             return "파트너 등록 이메일을 전송하였습니다.";
         }
@@ -50,7 +51,7 @@ public class VerificationApplication {
             throw new PartnerException(ErrorCode.ALREADY_VERIFY);
         }else{
             String code = getRendomCode();
-
+            Customer customer = verificationPartnerService.VerificationCustomerSignup(form);
             SendMailForm sendMailForm = SendMailForm.builder()
                     .from("testset@test.com")
                     .to(form.getEmail())
@@ -59,7 +60,7 @@ public class VerificationApplication {
                     .build();
 
             mailgunClient.sendEmail(sendMailForm);
-
+            verificationPartnerService.ChangeCustomerValidateEmail(customer.getId(),code);
             return "회원가입에 성공하였습니다.";
         }
     }

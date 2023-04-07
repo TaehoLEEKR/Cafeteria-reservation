@@ -1,5 +1,6 @@
 package com.mission.cafeteria.service;
 
+import com.mission.cafeteria.domain.form.SignUpForm;
 import com.mission.cafeteria.domain.form.VerificationForm;
 import com.mission.cafeteria.domain.model.Customer;
 import com.mission.cafeteria.domain.model.Partner;
@@ -23,6 +24,9 @@ public class VerificationPartnerService {
     private final CustomerRepository customerRepository;
     public Partner VerificationSignup(VerificationForm form){
         return partnerRepository.save(Partner.from(form));
+    }
+    public Customer VerificationCustomerSignup(SignUpForm form){
+        return customerRepository.save(Customer.from(form));
     }
     public boolean isEmailExist(String email){
         return partnerRepository.findByEmail(email.toLowerCase(Locale.ROOT)).isPresent();
@@ -56,7 +60,7 @@ public class VerificationPartnerService {
         }
     }
     @Transactional
-    public LocalDateTime ChangeCustomerValidateEmail(Long customerId , String code){
+    public LocalDateTime ChangePartnerValidateEmail(Long customerId , String code){
         Optional<Partner> customerOptional = partnerRepository.findById(customerId);
         if(customerOptional.isPresent()){
             Partner partner = customerOptional.get();
@@ -64,6 +68,18 @@ public class VerificationPartnerService {
             partner.setVerificationDt(LocalDateTime.now().plusDays(1));
 
             return partner.getVerificationDt();
+        }
+        throw new PartnerException(ErrorCode.NOT_FOUND_PARTNER);
+    }
+    @Transactional
+    public LocalDateTime ChangeCustomerValidateEmail(Long customerId , String code){
+        Optional<Customer> customerOptional = customerRepository.findById(customerId);
+        if(customerOptional.isPresent()){
+            Customer customer = customerOptional.get();
+            customer.setVerificationCode(code);
+            customer.setCustomerDt(LocalDateTime.now().plusDays(1));
+
+            return customer.getCustomerDt();
         }
         throw new PartnerException(ErrorCode.NOT_FOUND_PARTNER);
     }
