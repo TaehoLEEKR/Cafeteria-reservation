@@ -4,5 +4,16 @@ package com.mission.cafeteria.domain.model.redisRepository;
 import com.mission.cafeteria.domain.model.redis.Restaurant;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ReservationRepository extends CrudRepository<Restaurant,Long> {
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+    public interface ReservationRepository extends CrudRepository<Restaurant,Long> {
+    //Optional<Restaurant> findRestaurantByRestime(LocalDateTime ldt);
+    List<Restaurant> findByCafeid(int masterId);
+
+    Restaurant findByCafeidAndResid(int masterId, Long resId);
+
+
+
 }
