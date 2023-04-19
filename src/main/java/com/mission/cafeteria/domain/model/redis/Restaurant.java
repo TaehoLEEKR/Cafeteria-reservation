@@ -28,12 +28,15 @@ public class Restaurant {
     private int cafeid; // 매장 id
     private LocalDateTime restime; // 매장 예약 시간
 
-    private boolean reststatus; // 매장 예약 상태
+    @Indexed
+    private boolean resstatus; // 매장 예약 상태
 
     private String cname; // 매장 이름
 
+    @Indexed
     private String phone; // 고객 번호
 
+    @Indexed
     private String email; // 고객 이메일
     private int count ;
 }

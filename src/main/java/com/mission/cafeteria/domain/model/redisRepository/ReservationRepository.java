@@ -11,8 +11,12 @@ import java.util.Optional;
     public interface ReservationRepository extends CrudRepository<Restaurant,Long> {
     //Optional<Restaurant> findRestaurantByRestime(LocalDateTime ldt);
     List<Restaurant> findByCafeid(int masterId);
-
     Restaurant findByCafeidAndResid(int masterId, Long resId);
+
+    Restaurant findByEmailAndPhone(String email , String phone);
+    Optional<Restaurant> findByPhoneAndResstatus(String phone , boolean status);
+
+
 
 
 

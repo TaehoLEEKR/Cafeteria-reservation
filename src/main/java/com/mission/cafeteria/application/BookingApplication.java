@@ -26,7 +26,7 @@ public class BookingApplication {
     // 매장 존재 여부 확인 (isExsitsCafe) v
     // 예약시 중복시간 체크 (CheckTimeBooking)
     // 예약 승인 받았는지 체크 (VerifyBookingCustomer) v
-    // 매장 예약 (cafeBooking)
+    // 매장 예약 (cafeBooking) v
     public boolean isExsitsCafe(String cname){
         return bookingCustomerService.isExistCafeBooking(cname);
     }
@@ -59,7 +59,7 @@ public class BookingApplication {
             Restaurant restaurant =
                     reservationRepository.findByCafeidAndResid(masterId,resId);
 
-            restaurant.setReststatus(chk);
+            restaurant.setResstatus(chk);
             reservationRepository.save(restaurant);
         }
 

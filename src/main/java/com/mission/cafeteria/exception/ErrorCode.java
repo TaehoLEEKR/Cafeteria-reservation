@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 public enum ErrorCode {
 
     ALREADY_VERIFY(HttpStatus.BAD_REQUEST,"이미 인증이 완료 되었습니다."),
+    NOT_USE_CAFE(HttpStatus.BAD_REQUEST,"매장을 이용후 작성해 주세요"),
     NOT_HAVING_INFORMATION(HttpStatus.BAD_REQUEST,"Email && Phone 정보를 확인해주세요."),
     RESERVATION_NOT_ENOUGHT(HttpStatus.BAD_REQUEST,"예약 인원이 충분하지 않습니다."),
     NOT_VERIFY_BOOKING(HttpStatus.BAD_REQUEST,"예약이 승인되어있지 않습니다."),

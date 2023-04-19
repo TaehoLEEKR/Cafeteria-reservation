@@ -36,7 +36,6 @@ public class BookingController {
     public ResponseEntity<String> ReservationCustomerList(
             int masterId
     ){
-
         return ResponseEntity.ok(bookingApplication.checkCafeBooking(masterId).toString());
     }
 

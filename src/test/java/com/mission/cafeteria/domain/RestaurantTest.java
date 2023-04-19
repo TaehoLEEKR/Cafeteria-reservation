@@ -39,7 +39,7 @@ public class RestaurantTest {
                     .cafeid(i)
                     .email("TEST"+i)
                     .phone("0000"+i)
-                    .reststatus(false)
+                    .resstatus(false)
                     .restime(LocalDateTime.of(2023,i+1,i+1,10,i+1))
                     .count(i)
                     .build();
@@ -51,7 +51,7 @@ public class RestaurantTest {
                 .cafeid(1)
                 .email("TEST")
                 .phone("1111")
-                .reststatus(true)
+                .resstatus(true)
                 .restime(LocalDateTime.of(2023,1,1,10,1))
                 .count(1)
                 .build();

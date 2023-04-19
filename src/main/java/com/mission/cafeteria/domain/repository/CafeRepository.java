@@ -10,4 +10,6 @@ public interface CafeRepository extends JpaRepository<Cafe ,Long> {
     Optional<Cafe> findByEmail(String email);
     List<Cafe> findCafeByCname(String cname);
 
+    Optional<Cafe> findByCnameAndId(String cnmae , Long cid);
+
 }
