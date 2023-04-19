@@ -11,6 +11,7 @@ import org.springframework.data.redis.core.index.Indexed;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 @Data
@@ -26,7 +27,7 @@ public class Restaurant {
 
     @Indexed
     private int cafeid; // 매장 id
-    private LocalDateTime restime; // 매장 예약 시간
+    private LocalDateTime restime ; // 매장 예약 시간
 
     @Indexed
     private boolean resstatus; // 매장 예약 상태
@@ -39,4 +40,5 @@ public class Restaurant {
     @Indexed
     private String email; // 고객 이메일
     private int count ;
+
 }
