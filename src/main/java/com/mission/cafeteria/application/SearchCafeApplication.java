@@ -20,8 +20,8 @@ public class SearchCafeApplication {
         List<Cafe> cafeList = cafeRepository.findAll();
         return cafeList;
     }
-    public Optional<Cafe>  findByCnameAndId(String cname , Long id){
-        Optional<Cafe> cafeFindDetail = cafeRepository.findByCnameAndId(cname, id);
+    public Optional<Cafe>  findByCnameAndAddress(String cname , String address){
+        Optional<Cafe> cafeFindDetail = cafeRepository.findByCafeAndAddress(cname, address);
         if (cafeFindDetail == null){
             throw new PartnerException(ErrorCode.NOT_FOUND_CAFE);
         }

@@ -1,13 +1,12 @@
 package com.mission.cafeteria.application;
 
-import com.mission.cafeteria.domain.model.Cafe;
+import com.mission.cafeteria.domain.form.RegisteCafeForm;
 import com.mission.cafeteria.domain.model.redis.Restaurant;
 import com.mission.cafeteria.domain.model.redisRepository.ReservationRepository;
 import com.mission.cafeteria.domain.repository.CafeRepository;
 import com.mission.cafeteria.exception.ErrorCode;
 import com.mission.cafeteria.exception.PartnerException;
 import com.mission.cafeteria.service.BookingCustomerService;
-import com.mission.cafeteria.service.PartnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +14,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class BookingApplication {
     private final BookingCustomerService bookingCustomerService;
-    private final PartnerService partnerService;
+
     private final ReservationRepository reservationRepository;
     private final CafeRepository cafeRepository;
     // 매장 존재 여부 확인 (isExsitsCafe) v
@@ -31,9 +29,9 @@ public class BookingApplication {
     public boolean isExsitsCafe(String cname){
         return bookingCustomerService.isExistCafeBooking(cname);
     }
-    public boolean checkTimeBooking(LocalDateTime ldt,int cafeId){
+    public boolean checkTimeBooking(LocalDateTime ldt,String cname, String adr){
         List<Restaurant> restaurantList = new ArrayList<>();
-        List<Restaurant> items = reservationRepository.findByCafeid(cafeId);
+        List<Restaurant> items = reservationRepository.findByCnameAndAddress(cname,adr);
 
         if(items.isEmpty()){
             return true;
@@ -55,13 +53,13 @@ public class BookingApplication {
     }
 
     // 점주가 가지고있는 매장에 예약 리스트를 확인
-    public List<Restaurant> checkCafeBooking(int masterId){
-        List<Restaurant> restaurant = reservationRepository.findByCafeid(masterId);
+    public List<Restaurant> checkCafeBooking(String cname, String adr){
+        List<Restaurant> restaurant = reservationRepository.findByCnameAndAddress(cname,adr);
         return restaurant;
     }
-    public String VerifyBookingCustomer(int masterId, Long resId, boolean chk){
+    public String VerifyBookingCustomer(int cafeId, Long resId, boolean chk){
         Restaurant restaurant =
-                reservationRepository.findByCafeidAndResid(masterId,resId);
+                reservationRepository.findByCafeidAndResid(cafeId,resId);
         if(chk == false){
             restaurant.setResstatus(chk);
             reservationRepository.save(restaurant);
@@ -73,7 +71,8 @@ public class BookingApplication {
 
         return "예약이 승인되었습니다.";
     }
-    public String cafeBooking(Restaurant form){
+    public String cafeBooking(RegisteCafeForm form){
+
 
         String date =form.getRestime().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
@@ -81,14 +80,21 @@ public class BookingApplication {
 
         if(!isExsitsCafe(form.getCname())){ // 매장 이름으로 조사
             throw new PartnerException(ErrorCode.NOT_FOUND_CAFE);
-        }else if(!checkTimeBooking(dateTimeFormat , form.getCafeid())){ // redis에 저장된 예약시간이 중복인지 체크
+        }else if(!checkTimeBooking(dateTimeFormat , form.getCname(), form.getAddress())){ // redis에 저장된 예약시간이 중복인지 체크
             throw new PartnerException(ErrorCode.BOOKING_TIME_FAIL);
         }else if(form.getEmail()== null && form.getPhone() == null){ // 예약 정보가 정상적이지 않을 경우
             throw new PartnerException(ErrorCode.NOT_HAVING_INFORMATION);
         }
-        form.setRestime(dateTimeFormat);
-        form.setResstatus(false);
-        reservationRepository.save(form);
+        Restaurant restaurant =Restaurant.builder()
+                .resid(1L)
+                .cname(form.getCname())
+                .email(form.getEmail())
+                .phone(form.getPhone())
+                .resstatus(false)
+                .restime(dateTimeFormat)
+                .count(form.getCount())
+                .build();
+        reservationRepository.save(restaurant);
         return "예약이 완료되었습니다. 키오스크를 통해 10분전에 예약을 완료해주세요.";
     }
 

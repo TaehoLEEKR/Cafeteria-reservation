@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +22,7 @@ public class FindCafeController {
         return ResponseEntity.ok(searchCafeApplication.findAllCafeName());
     }
     @GetMapping("/cafe/detail")
-    ResponseEntity <Optional<Cafe>> findAllCafeDetail(String cname , Long id){ //매장의 상세정보 확인 및 검색
-        return ResponseEntity.ok(searchCafeApplication.findByCnameAndId(cname, id));
+    ResponseEntity <Optional<Cafe>> findAllCafeDetail(@RequestParam String cname ,@RequestParam String address){ //매장의 상세정보 확인 및 검색
+        return ResponseEntity.ok(searchCafeApplication.findByCnameAndAddress(cname, address));
     }
 }

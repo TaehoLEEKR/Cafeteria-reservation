@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class KioskForm {
     private String email;
     private String phone;
-    private boolean checkin = false;
+    //private boolean checkin = false;
 
 }

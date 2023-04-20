@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ReviewForm {
-    private Long id;
+    //private Long id;
     private String cname;
     private String content;
     private String phone;

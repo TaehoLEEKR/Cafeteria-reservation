@@ -16,7 +16,8 @@ public class VerificationForm {
     private String email; // email
     private String master; // 점장 이름
     private String password;
-    private LocalDateTime verificationDt; // 파트너 승인 날짜
-    private boolean verify; // 파트너 승인
+
+    //  private LocalDateTime verificationDt; // 파트너 승인 날짜
+//    private boolean verify; // 파트너 승인
 
 }

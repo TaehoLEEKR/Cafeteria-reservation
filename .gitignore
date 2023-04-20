@@ -19,6 +19,7 @@ bin/
 
 ### IntelliJ IDEA ###
 .idea
+/src/main/java/com/mission/cafeteria/config/FeignConfig.java
 *.iws
 *.iml
 *.ipr

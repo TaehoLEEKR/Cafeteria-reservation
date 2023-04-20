@@ -15,5 +15,5 @@ public class SignUpForm {
     private String name;
     private String password;
     private String phone;
-    private boolean customer_verify;
+    //private boolean customer_verify;
 }

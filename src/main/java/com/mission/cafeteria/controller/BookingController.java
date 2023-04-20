@@ -1,6 +1,7 @@
 package com.mission.cafeteria.controller;
 
 import com.mission.cafeteria.application.BookingApplication;
+import com.mission.cafeteria.domain.form.RegisteCafeForm;
 import com.mission.cafeteria.domain.model.Cafe;
 import com.mission.cafeteria.domain.model.redis.Restaurant;
 import com.mission.cafeteria.domain.repository.CafeRepository;
@@ -19,7 +20,7 @@ public class BookingController {
     private final CafeRepository cafeRepository;
 
     @PostMapping("/customer")
-    public ResponseEntity<String> ReservationCustomer(@RequestBody Restaurant form){
+    public ResponseEntity<String> ReservationCustomer(@RequestBody RegisteCafeForm form){
         return ResponseEntity.ok(bookingApplication.cafeBooking(form));
     }
     @GetMapping("/customer/bookinglist")
@@ -34,13 +35,13 @@ public class BookingController {
     // 파트너 점장이 해당 매장을 예약현황을 확인
     @GetMapping("/partner/bookinglist")
     public ResponseEntity<String> ReservationCustomerList(
-            int masterId
+            @RequestParam String cname , @RequestParam String address
     ){
-        return ResponseEntity.ok(bookingApplication.checkCafeBooking(masterId).toString());
+        return ResponseEntity.ok(bookingApplication.checkCafeBooking(cname,address).toString());
     }
 
     @PostMapping("/partner/bookingverify")
-    public ResponseEntity<String> ReservationVerifyCustomer(int masterId ,Long resId,boolean chk){
-        return ResponseEntity.ok(bookingApplication.VerifyBookingCustomer(masterId , resId , chk));
+    public ResponseEntity<String> ReservationVerifyCustomer(@RequestParam int cafeId ,Long resId,boolean chk){
+        return ResponseEntity.ok(bookingApplication.VerifyBookingCustomer(cafeId , resId , chk));
     }
 }

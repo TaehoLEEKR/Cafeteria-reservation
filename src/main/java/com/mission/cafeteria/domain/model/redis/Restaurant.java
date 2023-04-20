@@ -24,15 +24,16 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resid;
 
-
-    @Indexed
     private int cafeid; // 매장 id
     private LocalDateTime restime ; // 매장 예약 시간
 
     @Indexed
     private boolean resstatus; // 매장 예약 상태
-
+    @Indexed
     private String cname; // 매장 이름
+
+    @Indexed
+    private String address;
 
     @Indexed
     private String phone; // 고객 번호

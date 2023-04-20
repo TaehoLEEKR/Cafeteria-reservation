@@ -3,6 +3,7 @@ package com.mission.cafeteria.domain.form;
 import lombok.*;
 
 import javax.persistence.Entity;
+import java.time.LocalDateTime;
 
 
 @Getter
@@ -16,5 +17,7 @@ public class RegisteCafeForm {
     private String description;
     private String address;
     private String phone;
-    private Long masterid;
+    private int count;
+    private LocalDateTime restime;
+
 }

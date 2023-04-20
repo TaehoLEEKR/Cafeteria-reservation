@@ -34,7 +34,7 @@ public class Partner {
                 .email(form.getEmail())
                 .master(form.getMaster())
                 .password(form.getPassword())
-                .verificationDt(form.getVerificationDt())
+                //.verificationDt(form.getVerificationDt())
                 .verify(false)
                 .build();
     }

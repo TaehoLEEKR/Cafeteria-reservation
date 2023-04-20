@@ -34,7 +34,6 @@ public class Cafe {
                 .description(form.getDescription())
                 .address(form.getAddress())
                 .phone(form.getPhone())
-                .masterid(form.getMasterid())
                 .build();
     }
 }

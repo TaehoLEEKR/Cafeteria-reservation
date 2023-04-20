@@ -16,13 +16,13 @@ public class KioskController {
     private final KioskService kioskService;
     private final ReservationRepository reservationRepository;
 
-    @GetMapping
+    @GetMapping("/read")
     public ResponseEntity<Restaurant> showCafeInfo(@RequestParam String email , @RequestParam String phone)
     {
         return ResponseEntity.ok(reservationRepository.findByEmailAndPhone(email,phone));
     }
-    @PostMapping
-    public ResponseEntity<Boolean> checkInKiosk(@RequestBody KioskForm form){
-        return ResponseEntity.ok(kioskService.checkIn(form));
+    @PostMapping("/verify")
+    public ResponseEntity<Boolean> checkInKiosk(@RequestParam String email , @RequestParam String phone){
+        return ResponseEntity.ok(kioskService.checkIn(email,phone));
     }
 }
